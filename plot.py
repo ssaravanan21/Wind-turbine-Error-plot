@@ -4,7 +4,7 @@ import plotly.graph_objs as go
 import plotly.express as px
 
 def main():
-    st.title("Excel Data Plotter")
+    st.title("Wind turbine Buffer File Analyzer")
 
     uploaded_file = st.file_uploader("Upload an Excel file", type=["xlsx"])
     if uploaded_file is not None:
