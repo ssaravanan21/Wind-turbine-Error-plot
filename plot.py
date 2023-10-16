@@ -2,16 +2,34 @@ import streamlit as st
 import pandas as pd
 import plotly.graph_objs as go
 import plotly.express as px
+import io
 
 def main():
     st.title("Wind turbine Buffer File Analyzer")
 
-    uploaded_file = st.file_uploader("Upload an Excel file", type=["xlsx"])
+    uploaded_file = st.file_uploader("Upload a File", type=["xlsx", "txt"])  # Accept both Excel and text files
     if uploaded_file is not None:
-        df = pd.read_excel(uploaded_file)
+        if uploaded_file.type == 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet':
+            df = pd.read_excel(uploaded_file)
+        else:
+            # Handle text file with semicolon delimiters
+            content = uploaded_file.read().decode("utf-8")
+            content_lines = content.split('\n')
+            
+            # Find the line where the data starts (you might need to adjust this)
+            data_start_line = 3  # Assuming data starts from line 5 (zero-based index)
+            
+            # Create a DataFrame from the data lines
+            data_lines = content_lines[data_start_line:]
+            df = pd.read_csv(io.StringIO('\n'.join(data_lines)), delimiter=';')
+            
+            # Add an extra row with column names (assuming you have 52 columns)
+            column_names = [f"Column{i}" for i in range(1, 53)]
+            df.columns = column_names
+
         st.write("Data Preview:")
         st.write(df)
-
+        
         if 'Column9' in df.columns:
             # Handle missing or incompatible data in 'Column9'
             try:
