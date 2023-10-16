@@ -9,3 +9,7 @@ While Excel can provide plots, it often takes time to process. By leveraging Pan
 As an additional feature, we've incorporated frequency derivation, a useful parameter for error analysis. This data column is not typically present in the buffer file but adds valuable insights.
 
 Another notable feature is the comparison plot, which allows users to analyze two columns simultaneously. This tool is designed to make error analysis in wind power plants more accessible and efficient.
+
+After testing with the technician, we have identified the need for an additional feature. This feature should allow us to upload files in either XLSX or TXT format.
+
+Initially, we generate .txt files from SCADA. If we can directly upload these .txt files, it would greatly streamline our process, saving both time and effort. As a result, we have implemented this functionality
