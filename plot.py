@@ -16,14 +16,14 @@ def main():
             content = uploaded_file.read().decode("utf-8")
             content_lines = content.split('\n')
             
-            # Find the line where the data starts (you might need to adjust this)
-            data_start_line = 3  # Assuming data starts from line 5 (zero-based index)
+            # Find the line where the data starts 
+            data_start_line = 3  
             
             # Create a DataFrame from the data lines
             data_lines = content_lines[data_start_line:]
             df = pd.read_csv(io.StringIO('\n'.join(data_lines)), delimiter=';')
             
-            # Add an extra row with column names (assuming you have 52 columns)
+            # Add an extra row with column names 
             column_names = [f"Column{i}" for i in range(1, 53)]
             df.columns = column_names
 
@@ -43,7 +43,7 @@ def main():
 
         # Create a dictionary with custom names for columns
         custom_column_names = {
-            'Column1': 'Timestamp',  # Add more columns as needed
+            'Column1': 'Timestamp',  
             'Column2': 'Converter_UL1',
             'Column3': 'Converter_UL2',
             'Column4': 'Converter_UL3',
@@ -96,7 +96,7 @@ def main():
             'Column50': 'Pitch_error_code_2_3',
             'Column51': 'Pitch_error_code_3_3',  
             'Column52': 'Rated_blade_pos'
-            # Add more columns as needed
+            
         }
 
         st.sidebar.subheader("Select Columns for Plotting")
